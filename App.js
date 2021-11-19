@@ -1,21 +1,43 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState }  from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import store from './src/helpers/store'
+import { Provider } from 'react-redux';
+
+import {Batton} from './src/components/Batton';
+import { Lists } from './src/components/Lists';
 
 export default function App() {
+  const [input,setInput]=useState(false)
+ const callInput = t =>{
+    setInput(t)
+  }
   return (
+    <Provider store={store}>
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+     < Batton callInput={callInput} />
+     <View style={styles.containerTasks}>
+     <StatusBar style="auto" />
+      <Lists input={input} callInput={callInput}/>
+    
+     </View>
+    
     </View>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor:'#808080',
+    flex:1,
   },
+  containerTasks:{
+  
+  },
+  text:{
+    color:'#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 30
+  }
 });
